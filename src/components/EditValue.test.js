@@ -1,28 +1,34 @@
 //Import React
 import React from 'react';
 //Import test renderer
-import TestRenderer from 'react-test-renderer';
+import {render,fireEvent,cleanup} from '@testing-library/react';
 //Import component to test
-import {EditValue} from './DisplayValue';
-import {EditValue} from './DisplayValue';
+import {EditValue} from './EditValue';
 
 
-describe( 'EditValue component', ()=> {
-    it( 'Has the supplied value in the input', () => {
 
+describe("EditValue componet", () => {
+    afterEach(cleanup);
+
+    it( 'matches snapshot', () => {
+        expect( render(<EditValue onChange={jest.fn()} value={"Hi Roy"} id={'some-id'} className={"some-class"}   /> )).toMatchSnapshot();
     });
 
-    it( 'id and for attribute match', () => {
-
+    it("Calls the onchange function", () => {
+        const onChange = jest.fn();
+        const { getByTestId } = render(<EditValue onChange={onChange} value={""} id={'input-test'}  className={"some-class"}  />);
+        fireEvent.change(getByTestId("input-test"), {
+            target: { value: "New Value" }
+        });
+        expect(onChange).toHaveBeenCalledTimes(1);
     });
 
-    it( 'Passes string to onChange when changed', () => {
-
+    it("Passes updated value, not event to onChange callback", () => {
+        const onChange = jest.fn();
+        const { getByTestId } = render(<EditValue onChange={onChange} value={""} id="input-test" className={"some-class"}    />);
+        fireEvent.change(getByTestId("input-test"), {
+            target: { value: "New Value" }
+        });
+        expect(onChange).toHaveBeenCalledWith("New Value");
     });
-
-    it( 'Passes string to onChange when changed with an integer', () => {
-
-    });
-
-
 });

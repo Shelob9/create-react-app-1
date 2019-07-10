@@ -1,11 +1,13 @@
 import React from 'react';
-
 /**
  * Edit the value
  */
-export const EditValue = ({value,className,onChange,id}) =>(
-    <div className={className}>
-        <label htmlFor={id}>Set Value</label>
-        <input id={id} value={value} onChange={onChange} />
+export const EditValue = ({ onChange, value,id,className}) => {
+  const changeHandler = event => onChange(event.target.value);
+  return (
+      <div className={className}>
+      <label htmlFor={id}>Set Value</label>
+        <input data-testid={id} id={id} onChange={changeHandler} value={value} />
     </div>
-);
+  );
+};
