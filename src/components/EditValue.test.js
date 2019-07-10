@@ -6,7 +6,6 @@ import {render,fireEvent,cleanup} from '@testing-library/react';
 import {EditValue} from './EditValue';
 
 
-
 describe("EditValue componet", () => {
     afterEach(cleanup);
 

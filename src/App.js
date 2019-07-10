@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
-
+import {EditValue} from './components/EditValue';
+import {DisplayValue} from './components/DisplayValue';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [theValue,setTheValue] = useState('Hi Roy');
+    return (
+        <div className="App">
+            <DisplayValue value={theValue} className={'display-value'} data-testid="number-display" />
+            <EditValue value={theValue} onChange={setTheValue} className={'edit-value'} id={'the-input'} />
+        </div>
+    );
 }
 
 export default App;
