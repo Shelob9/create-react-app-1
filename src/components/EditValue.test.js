@@ -10,7 +10,8 @@ describe("EditValue componet", () => {
     afterEach(cleanup);
 
     it( 'matches snapshot', () => {
-        expect( render(<EditValue onChange={jest.fn()} value={"Hi Roy"} id={'some-id'} className={"some-class"}   /> )).toMatchSnapshot();
+        const {container} = render(<EditValue onChange={jest.fn()} value={"Hi Roy"} id={'some-id'} className={"some-class"}   /> );
+        expect( container ).toMatchSnapshot();
     });
 
     it("Calls the onchange function", () => {
