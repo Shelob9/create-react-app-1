@@ -15,8 +15,8 @@ describe("EditValue componet", () => {
 
     it("Calls the onchange function", () => {
         const onChange = jest.fn();
-        const { getByTestId } = render(<EditValue onChange={onChange} value={""} id={'input-test'}  className={"some-class"}  />);
-        fireEvent.change(getByTestId("input-test"), {
+        const { getByLabelText } = render(<EditValue onChange={onChange} value={""} id={'input-test'}  className={"some-class"}  />);
+        fireEvent.change(getByLabelText("Set Value"), {
             target: { value: "New Value" }
         });
         expect(onChange).toHaveBeenCalledTimes(1);
@@ -24,8 +24,8 @@ describe("EditValue componet", () => {
 
     it("Passes updated value, not event to onChange callback", () => {
         const onChange = jest.fn();
-        const { getByTestId } = render(<EditValue onChange={onChange} value={""} id="input-test" className={"some-class"}    />);
-        fireEvent.change(getByTestId("input-test"), {
+        const { getByDisplayValue } = render(<EditValue onChange={onChange} value={"Old Value"} id="input-test" className={"some-class"}    />);
+        fireEvent.change(getByDisplayValue("Old Value"), {
             target: { value: "New Value" }
         });
         expect(onChange).toHaveBeenCalledWith("New Value");
